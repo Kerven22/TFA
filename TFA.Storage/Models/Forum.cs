@@ -10,6 +10,6 @@ namespace TFA.Storage.Models
         public string Title { get; set; }
 
         [InverseProperty(nameof(Topic.Forum))]
-        public ICollection<Topic> Topics { get; set; }
+        public ICollection<Topic>? Topics { get; set; }
     }
 }

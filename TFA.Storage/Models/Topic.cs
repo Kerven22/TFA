@@ -26,7 +26,7 @@ namespace TFA.Storage.Models
         public Forum Forum { get; set; }
 
         [InverseProperty(nameof(Comment.Topic))]
-        public ICollection<Comment> Comments { get; set; }
+        public ICollection<Comment>? Comments { get; set; }
 
     }
 }

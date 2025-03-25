@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TFA.Storage.Configurations;
 using TFA.Storage.Models;
 
 namespace TFA.Storage.DatabaseContext
@@ -14,5 +15,11 @@ namespace TFA.Storage.DatabaseContext
         public DbSet<Comment> Comments { get; set; }
 
         public DbSet<User> Users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new CommentConfiguration()); 
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

@@ -15,13 +15,11 @@ namespace TFA.Storage.Models
         public DateTimeOffset? UpdatedAt { get; set; }
 
         public Guid TopicId { get; set; }
-
-        public Guid UserId { get; set; }
-
         [ForeignKey(nameof(TopicId))]
         public Topic Topic { get; set; }
 
-        [ForeignKey(nameof(UserId))]
+        public Guid UserId { get; set; }
+
         public User Author { get; set; }
 
     }
