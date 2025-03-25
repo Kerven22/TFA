@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TFA.Domain.Models;
 
 namespace TFA.Domain.UseCases.GetForum
 {
-    internal class GetForumUseCase
+    public class GetForumUseCase : IGetForumUseCase
     {
+        public Task<IEnumerable<ForumDto>> Execute()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

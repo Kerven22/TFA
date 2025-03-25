@@ -25,7 +25,7 @@ namespace TFA.Storage.Models
         [ForeignKey(nameof(ForumId))]
         public Forum Forum { get; set; }
 
-        [InverseProperty(nameof(Comment.Topic)]
+        [InverseProperty(nameof(Comment.Topic))]
         public ICollection<Comment> Comments { get; set; }
 
     }
