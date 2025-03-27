@@ -1,4 +1,5 @@
-﻿using TFA.Domain.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using TFA.Domain.Models;
 using TFA.Storage.DatabaseContext;
 
 namespace TFA.Domain.UseCases.GetForum
@@ -10,9 +11,11 @@ namespace TFA.Domain.UseCases.GetForum
         {
             _dbContext = dbContext; 
         }
-        public async Task<IEnumerable<ForumDto>> Execute(CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<IEnumerable<ForumDto>> Execute(CancellationToken cancellationToken)=>
+            await _dbContext.Forums.Select(s => new ForumDto
+            {
+                Id = s.ForumId,
+                Title = s.Title
+            }).ToArrayAsync(cancellationToken); 
     }
 }
