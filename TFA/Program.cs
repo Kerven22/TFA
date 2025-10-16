@@ -1,17 +1,14 @@
-using TFA.Domain.UseCases.CreateTopic;
-using TFA.Domain.UseCases.GetForum;
-using TFA.Extentions;
+using TFA.Domain.DependencyInjection;
+using TFA.Storage.DependencyInjection; 
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers(); 
+builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.SqlConnectionConfig(builder.Configuration); 
-
-builder.Services.AddScoped<IGetForumUseCase, GetForumUseCase>();
-builder.Services.AddScoped<ICreateTopicUseCase, CreateTopicUseCase>(); 
+builder.Services.AddStorageServices(builder.Configuration.GetConnectionString("sqlconnection")!);
+builder.Services.AddDomainServices();
 
 var app = builder.Build();
 
@@ -19,6 +16,6 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
-app.MapControllers(); 
+app.MapControllers();
 
 app.Run();
