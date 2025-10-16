@@ -1,4 +1,4 @@
-﻿namespace TFA.Domain.Factories
+﻿namespace TFA.Storage.Factories
 {
     public interface IGuidFactory
     {
