@@ -12,6 +12,7 @@ namespace TFA.Storage.Mapping
                 .ForMember(d => d.Id, s => s.MapFrom(t => t.TopicId));
             CreateMap<Forum, ForumDto>()
                 .ForMember(d=>d.Id, s=>s.MapFrom(t => t.ForumId));
+
         }
     }
 }

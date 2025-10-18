@@ -1,11 +1,15 @@
 ﻿namespace TFA.Domain.UseCases.SignOn
 {
-    public record UserSignOnCommand(
-        string FirstName, 
-        string SecondaName, 
-        string Login, 
-        string Email, 
-        string Password,
-        string PhoneNumber,
-        int Age); 
+    public record UserSignOnCommand
+    {
+        public string FirstName { get; init; }
+        public string SecondName { get; init; }
+        public string Login { get; init; }
+        public string Email { get; init; }
+        public string Password { get; init; }
+        public string PhoneNumber { get; init; }
+        public int Age { get; init; }
+    }
+
+
 }

@@ -11,6 +11,7 @@
             UserId = userId;
         }
         public Guid UserId { get; }
+        public static User Guest => new User(Guid.Empty); 
     }
 
     public static class IdenetityExtention

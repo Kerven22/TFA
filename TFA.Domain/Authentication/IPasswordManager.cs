@@ -2,8 +2,8 @@
 {
     public interface IPasswordManager
     {
-        (byte[] salt, byte[] hash) GeneratePassword(string password);
+        (byte[] salt, byte[] hash) GeneratePasswordHash(string password);
 
-        bool ComparePassword(byte[] salt, string password, byte[] passwordHash); 
+        bool ComparePassword(byte[] salt, string plainText, byte[] passwordHash); 
     }
 }

@@ -5,18 +5,20 @@ namespace TFA.Domain.Authentication
 {
     public class PasswordManager : IPasswordManager
     {
-        private int saltLength = 60;
-        private Lazy<SHA256> sha256;
+        private const int saltLength = 100;
+        private Lazy<SHA256> sha256 = new(SHA256.Create);
 
-        public bool ComparePassword(byte[] salt, string password, byte[] passwordHash)
+        public bool ComparePassword(byte[] salt, string plainText, byte[] passwordHash)
         {
-            return ComputeHash(salt, password).SequenceEqual(passwordHash); 
+            return ComputeHash(salt, plainText).SequenceEqual(passwordHash); 
         }
 
-        public (byte[] salt, byte[] hash) GeneratePassword(string password)
+        public (byte[] salt, byte[] hash) GeneratePasswordHash(string password)
         {
             var salt = RandomNumberGenerator.GetBytes(saltLength);
+
             var hash = ComputeHash(salt, password);
+
             return (salt, hash.ToArray()); 
         }
 
@@ -26,7 +28,8 @@ namespace TFA.Domain.Authentication
 
             var buffer = new byte[passwordBytes.Length+salt.Length];
 
-            Array.Copy(passwordBytes, buffer, password.Length);
+            Array.Copy(passwordBytes, buffer, passwordBytes.Length);
+
             Array.Copy(salt, 0, buffer, passwordBytes.Length, salt.Length);
 
             lock (sha256)

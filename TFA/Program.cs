@@ -1,3 +1,5 @@
+using System.Reflection;
+using TFA.Domain.Authentication;
 using TFA.Domain.DependencyInjection;
 using TFA.Storage.DependencyInjection; 
 
@@ -9,6 +11,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddStorageServices(builder.Configuration.GetConnectionString("sqlconnection")!);
 builder.Services.AddDomainServices();
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.Configure<AuthenticationConfiguration>(
+    builder.Configuration.GetSection("AuthenticationConfiguration").Bind);
 
 var app = builder.Build();
 

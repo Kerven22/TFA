@@ -21,9 +21,11 @@ namespace TFA.Domain.UseCases.SignOn
             {
                 throw new UserExistsExveption(command.Login);
             }
-            var (salt, hash) = _passwordManager.GeneratePassword(command.Password); 
 
-            await _storage.SignOn(command.FirstName, command.SecondaName, command.Login, command.Email, hash, salt, command.PhoneNumber, command.Age, cancellationToken); 
+            var (salt, hash) = _passwordManager.GeneratePasswordHash(command.Password); 
+
+            await _storage.SignOn(command.FirstName, command.SecondName, command.Login, command.Email, hash, 
+                salt, command.PhoneNumber, command.Age, cancellationToken); 
         }
     }
 }
